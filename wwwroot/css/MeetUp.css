@@ -1,0 +1,64 @@
+thead
+{
+    font-size:20px;
+    font-family: 'Playfair Display', serif;
+    }
+*
+{
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color:black;
+}
+.table
+{
+    border: 1px solid black;
+}
+a{
+    font-family: 'Merriweather', serif;
+    color:black;
+}
+td
+{
+    color:black;
+    border-bottom: 1px solid black;
+}
+a:hover
+{
+    color:rgb(156,255,254);
+}
+.btn:hover
+{
+    background: white;
+    color: black;
+}
+.card
+{
+    display:inline-block;
+    margin-left: 50px;
+    border: none;
+}
+h2
+{
+    text-align:center;
+    border-bottom: 2px solid black;
+    margin: 20px;
+}
+.jumbotron
+{
+    background:url(https://images.unsplash.com/photo-1525104647001-009b65875ee6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1355&q=80);
+    height: 300px;
+    margin: 0;
+}
+.bkg
+{
+    background: hsla(0, 10%, 87%, 0.6);
+    border-radius: 20px;
+}
+.lead
+{
+    font-size: 25px;
+    font-family: 'Merriweather', serif;
+}
+.card-img-top{
+    border-radius: 10px;
+}

@@ -1,0 +1,22 @@
+.bkg{
+    background: hsla(0, 30%, 87%, 0.5);
+    width: 700px;
+    border-radius: 10px;
+}
+*{
+    font-family: 'Playfair Display', serif;
+}
+a{
+    color:black;
+    border-bottom: 2px solid black;
+    font-size: 20px;
+}
+a:hover{
+    color: orange;
+}
+p{
+    font-size: 17px;
+}
+h5{
+    font-size: 30px;
+}

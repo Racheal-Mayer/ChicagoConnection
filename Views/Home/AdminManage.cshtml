@@ -1,0 +1,58 @@
+@model List<User>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/AdminManage.css"/>
+<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+                <a class="navbar-brand">Admin Dashboard</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="/logout">Logout</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="/home">Home</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    <div class="container">
+<h1>Admin Manage Users</h1>
+<a class="btn btn-sm" style="margin-left:90%;" href="/create">Add New</a>
+
+<table class="table border border-danger">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Created At</th>
+            <th>User Level</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+<tbody>
+    @foreach(var u in Model)
+    {
+    <tr>
+        <td>@u.UserId</td>
+        <td> <a href="/show/@u.UserId" class="btn btn-sm">@u.FirstName @u.LastName</a></td>
+            <td>@u.Email </td>
+            <td>@u.CreatedAt</td>
+            <td> @if(@u.Admin)
+                { 
+                    <span>Admin</span>
+                } 
+                else
+                {
+                    <span>User</span> } </td>
+            <td><a href="/Admin/edit/@u.UserId">Edit</a>
+            <a href="/delete/@u.UserId">Remove</a> </td>
+    </tr>
+    }
+    </tbody>
+</table>
+

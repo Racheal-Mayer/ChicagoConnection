@@ -1,0 +1,27 @@
+@model Login
+
+
+
+<div class="card2" style="background:none;">
+    <h1 class="card-header2"> &nbsp; Login </h1>
+    <div class="card-body2">
+        <form action="/login" method="post">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label style="color:rgb(52,58,64); margin: 10px;">Email:</label>
+                    <input asp-for="LoginEmail" class="form-control2">
+                    <span asp-validation-for="LoginEmail" class="text-warning"></span>
+                </div>
+                <div class="form-group">
+                    <label style="color:rgb(52,58,64); margin: 10px;">Password:</label>
+                    <input asp-for="LoginPassword" class="form-control2">
+                    <span asp-validation-for="LoginPassword" class="text-warning"></span>
+                </div>
+            </div>
+        </div>
+        <input type="submit" class="btn2" value="Login" />
+    </form>
+</div>
+</div>
+</div>

@@ -1,0 +1,53 @@
+@model List<User>
+    <link rel="stylesheet" href="~/css/Home.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@0;1&family=Merriweather&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+
+<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark text-light bg-dark border-bottom box-shadow mb-3">
+                <a class="navbar-brand">User Dashboard</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="/logout">Logout</a>
+                        </li>
+                        @if(ViewBag.User.Admin == true) 
+                {
+                    <li class="nav-item">
+                    <a href="/Admin/Manage" class="nav-link text-light">Admin Page</a>
+                    </li>
+                }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+<div class="container">
+<div class="post">
+<h1>Post.</h1>
+<h3>Socialize with other Chicagoans. </h3>
+<img src="https://images.unsplash.com/photo-1521575107034-e0fa0b594529?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1048&q=80" style="border-radius:20px;" alt="image of vacation"> <br>
+<a href="/Wall">Enter the Wall</a>
+</div>
+
+<div class="meetup">
+<h1>Meet Up.</h1>
+<h3>See, join, and plan activities around the city.</h3>
+<img src="https://images.unsplash.com/photo-1461595520627-42e3c83019bc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1489&q=80" style="border-radius:20px;" alt="image of vacation"> <br>
+<a href="MeetUp">Plan Hangs.</a>
+</div>
+
+<div class="connect">
+<h1>Connect.</h1>
+<h3>Network within your industry.</h3>
+<img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80" style="border-radius:20px;" alt="image of vacation"> <br>
+<a href="/Deets">See Deets</a>
+</div>
+
+<div class="help">
+<h1>Help.</h1>
+<h3>Find out how you can help your community.</h3>
+<img src="https://www.niemanlab.org/images/block-club-chicago-logo.jpg" style="border-radius:20px;" alt="image of vacation"> <br>
+<a href="http://www.blockclubchicago.org">Block Club</a>
+</div>

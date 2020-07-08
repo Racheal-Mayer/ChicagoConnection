@@ -1,0 +1,77 @@
+*{
+    font-family: 'Playfair Display', serif;
+    color:white;
+}
+input{
+    font-family: 'Merriweather', serif;
+    font-size: 20px;
+}
+.form-control{
+    background:none;
+    border: none;
+    border-left: 2px solid white;
+    border-top: 2px solid white;
+    color: white;
+}
+.form-control2{
+    background:none;
+    border: none;
+    border-left: 2px solid rgb(44,61,79);
+    border-top: 2px solid rgb(44,61,79);
+    margin: 10px;
+    color: rgb(44,61,79);
+}
+.card{
+    margin: 20px;
+}
+.card2{
+    margin: 20px;
+    width: 400px;
+    border: 2px solid rgb(44,61,79);
+}
+.card-body{
+    border: 2px solid white;
+}
+.card-header
+{
+    background: white;
+    border: 1px solid white;
+    color:rgb(52,58,64);
+}
+.card-header2
+{
+    background: rgb(44,61,79);
+    border: 1px solid rgb(44,61,79);
+    color:white;
+    height: 70px;
+}
+
+a{
+    color:white;
+    border-bottom: 2px solid white;
+    font-size: 20px;
+}
+
+a:hover{
+    color: rgb(52,58,64);
+    background:white;
+}
+
+.btn{
+    background:white;
+    color:rgb(52,58,64);
+    font-family: 'Merriweather', serif;
+}
+.btn2{
+    background: rgb(44,61,79);
+    color: white;
+    margin: 10px;
+}
+.container{
+    height: 900px;
+    background: url(https://icbstexas.com/wp-content/uploads/split-color-background.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width:1170px;
+}

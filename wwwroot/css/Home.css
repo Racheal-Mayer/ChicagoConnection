@@ -1,0 +1,40 @@
+*{
+    font-family: 'Playfair Display', serif;
+}
+.table{
+    width: 700px;
+    margin: 20px;
+}
+.meetup{
+    display: inline-block;
+    margin-left: 20px;
+}
+.post{
+    display: inline-block;
+}
+.connect{
+    display: inline-block;
+}
+.help{
+    display:inline-block;
+    margin-left: 20px;
+}
+img{
+    height: 300px; 
+}
+a{
+    color: orangered;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+a:hover{
+    color:black;
+}
+h3{
+    font-family: 'Merriweather', serif;
+    font-size: 25px;
+}
+h1{
+    border-bottom: 2px solid black;
+    width: 250px;
+}

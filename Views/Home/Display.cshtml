@@ -1,0 +1,77 @@
+@model User 
+<link rel="stylesheet" href="~/css/Display.css"/>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@0;1&family=Merriweather&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">  
+<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Chicago Connection</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/logout">Logout</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/home">Home</a>
+                        </li>
+                        @if(Model.Admin == true) 
+                {
+                    <li class="nav-item">
+                    <a href="/Admin/Manage" class="nav-link text-dark">Admin Page</a>
+                    </li>
+                }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+<div class="hangs">
+<h1 style="font-size: 35px;">Hang outs @Model.FirstName has planned:</h1>
+    <table class="table table-sm">
+        <tbody>
+        @foreach( var Meetup in Model.PlannedActivities)
+        {
+            <tr>
+                <td><a href="/activity/@Meetup.MeetUpId"><img style="border-radius: 10px;height: 100px; width: 150px;" src="@Meetup.ActImg" class="card-img-top" alt="..."></a></td>
+                <td>@Meetup.Title</td>
+                <td>@Meetup.Date.ToShortDateString() @Meetup.Date.ToShortTimeString()</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+<h1>& RSVPs:</h1>
+<table class="table table-sm">
+    <tbody>
+        @foreach( var A in Model.MyJoins)
+{
+        <tr>
+            <td><a href="/activity/@A.MeetUpId"><img style="border-radius: 10px; height: 100px; width: 150px;" src="@A.Joined.ActImg" class="card-img-top" alt="..."></a></td>
+            <td>@A.Joined.Title</td>
+            <td>@A.Joined.Date.ToShortDateString() @A.Joined.Date.ToShortTimeString()</td>
+        </tr>
+}
+    </tbody>
+</table>
+</div>
+<div class="card" style="width: 700px; margin-left:60px; margin-top: 20px;">
+    <h1>@Model.FirstName @Model.LastName</h1>
+    <img src="@Model.ImgUrl" style= "height: 300px; width: 399px; border-radius: 10px;" alt="image of User">
+    <div class="card-body">
+    <p class="card-text">
+        <ul>
+        <img style="width: 50px; height: 50px;" src="https://www.expectmorearizona.org/wp-content/uploads/2019/01/Email-Icon.png" alt=""> Email: @Model.Email <br>
+        <img style="width: 50px; height: 50px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRHhBYHepcwInj2aKqjHlhngICkuBjSv50CrQ&usqp=CAU" alt=""> Instagram: @Model.Handle
+            <li>Industry: @Model.Industry</li>
+            <li>Member Since: @Model.CreatedAt.ToShortDateString()</li>
+            <li>User Level: @if(@Model.Admin)
+                { 
+                    <span>Admin</span>
+                } 
+                else
+                {
+                    <span>User</span> } </li><br>
+            <li>About Me: @Model.Description</li>
+        </ul>
+    </p>
+
+</div>

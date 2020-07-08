@@ -1,0 +1,75 @@
+@model MeetUp
+<link rel="stylesheet" href="~/css/DisplayActivity.css"/>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Chicago Connection</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="/home">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="/logout">Logout</a>
+                        </li>
+                        @if(ViewBag.User.Admin == true) 
+                {
+                    <li class="nav-item">
+                    <a href="/Admin/Manage" class="nav-link text-light">Admin Page</a>
+                    </li>
+                }
+                <li><a class="nav-link text-light" href="/activity/new">Add a New Activity</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+<div class="container">
+
+
+<div class="row">
+    <div class="col-sm-8 offset-sm-2">
+        <div class="card">
+            <h1 class="card-header">@Model.Title</h1>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <p> Event Coordinator: <a href="/show/@Model.Coordinator.UserId">@Model.Coordinator.FirstName</a><img src="@Model.Coordinator.ImgUrl" style= "height: 50px; width: 60px; border-radius: 10px;" alt="Activity"></p>
+                        <img src="@Model.ActImg" style= "height: 250px; width: 360px; border-radius: 10px;" alt="Activity">
+                        <br><br>
+                        <p> Date: @Model.Date.ToShortDateString() </p>
+                        <p> Time: @Model.Date.ToShortTimeString() </p>
+                        <p> Duration: @Model.DurationTime @Model.Duration </p>
+                        <p class="desc"> Description: @Model.Description </p>
+                        
+                        </div>
+                            <div class="col-sm-4">
+                                <ul class="list-group">
+                                    <li class="list-group-item cardheader"> RSVPs: </li>
+                                    @foreach( var w in Model.Participants)
+                                    {
+                                    <a href="/show/@w.Tagalong.UserId"><li class="list-group-item">@w.Tagalong.FirstName  <img src="@w.Tagalong.ImgUrl" style= "height: 50px; width: 60px; border-radius: 10px;" alt="Activity"></li></a>
+                                    }
+                                @if(ViewBag.User.UserId == Model.Coordinator.UserId)
+                {
+                    <a class="btn btn-sm" href="/activity/@Model.MeetUpId/delete"> Cancel Event </a>
+                }
+                else
+                {
+                    if(Model.Participants.Any(m => m.UserId == ViewBag.User.UserId))
+                    //query to see if they are watching
+                    {                                           //has to be exactly what you called it in route.
+                        <a class="btn btn-sm" asp-action="ToggleActivity" asp-route-meetupId="@Model.MeetUpId" asp-route-status="leave" > Back Out</a>
+                    }
+                    else
+                    {
+                        <a class="btn  btn-sm" asp-action="ToggleActivity" asp-route-meetupId="@Model.MeetUpId" asp-route-status="join" > Join In! </a>
+                    }
+                }
+        
+            </div>
+        </div>
+    </div> 
+</div>

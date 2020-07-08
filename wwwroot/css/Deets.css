@@ -1,0 +1,22 @@
+*{
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+}
+th{
+    font-size: 30px;
+}
+a{
+color:gray;
+font-family: 'Merriweather', serif;
+text-decoration: underline;
+}
+a:hover{
+    color: red;
+}
+.links{
+    margin-left: 85%;
+}
+p{
+    font-family: 'Merriweather', serif;
+    text-align:center;
+}

@@ -1,0 +1,47 @@
+@model List<User>
+    <link rel="stylesheet" href="~/css/Deets.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@0;1&family=Merriweather&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+<div class="container">
+
+<div class="col-sm-12" style="margin: 0;">
+    <table class="table table-sm">
+        <tr>
+        <thead class="thead-dark">
+            <th>Users</th>
+            <th>Industry</th>
+        </thead>
+        </tr>
+    @foreach(var u in Model)
+    {
+        <tr>
+            <td>
+        <img src="@u.ImgUrl" style= "height: 50px; width: 50px;" alt="image of User">
+        @if(ViewBag.User.UserId == u.UserId)
+        {
+            <a href="/edit/@u.UserId"> @u.FirstName @u.LastName </a> 
+        }
+                else 
+                {
+                @if(ViewBag.User.UserId != u.UserId) 
+                {
+                    <a href="show/@u.UserId">@u.FirstName @u.LastName</a>
+                }
+                }   
+            </td>
+            <td>@u.Industry</td>
+        </tr>
+    }
+    <div class="links">
+    <a href="/home">Home </a> <br>
+    <a href="/logout">Logout </a> <br>
+    @if(ViewBag.User.Admin == true) 
+                {
+                    <a href="/Admin/Manage">Admin Page </a>
+                }
+            </div>
+            <h1 style="text-align:center;">Meet your friends, @ViewBag.User.FirstName.</h1>
+    <p>Click on a user to check out their details.
+    Click on your name to edit your profile.<br>
+    (add profile picture, industry, and handle so others can connect with you!)</p>
+</div>
+</div>

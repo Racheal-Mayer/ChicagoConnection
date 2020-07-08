@@ -1,0 +1,111 @@
+@model Message
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@0;1&family=Merriweather&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="~/css/Wall.css"/>
+<nav class="navbar navbar-fixed-top navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
+                <a style="color:white;" class="navbar-brand" href="/Home">Chicago Connection. </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="/logout">Logout</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="/MeetUp">Meet Up</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="/edit/@ViewBag.User.UserId">Edit your profile. </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="wrapper">
+<div class="articles">
+<h4 style="border-bottom: 1px solid red;">Top News Today</h4>
+@foreach(var article in ViewBag.News.articles)
+    {
+        <img src="@article.urlToImage" style="width: 300px; border-radius: 10px;" alt="Card image cap">
+        <p style="font-family:'Playfair Display'">@article.title </p>
+        <p style="font-size: 15px;">@article.description</p>
+        <a style="border-bottom: 1px solid red;" href="@article.url"> Read More </a>
+    }
+</div>
+
+<div class="wall">
+<div class="card" style="border: 1px solid rgb(52,58,64);">
+<div class="card-header" style="border-bottom: 3px solid rgb(52,58,64); background: white;"><h1 style="border-bottom: 1px solid red;">Welcome to the wall, @ViewBag.User.FirstName 
+    <img src="@ViewBag.User.ImgUrl" style= "height: 150px; width: 150px;" alt="image of User">
+</h1>
+
+</div>
+<div class="card-body">
+    <form action="/message" method="post">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Post a Message:</label>
+                    <input type="textarea" asp-for="Content" class="form-control">
+                    <input type="text" asp-for="Image" placeholder="Add Image" class="form-control">
+                </div>
+                    <input type="submit" class="btn btn-sm btn-outline-danger" value="POST" />
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<ul style="list-style-type:square;">
+@foreach (var c in ViewBag.Messages)
+{
+    <li style="border-top:1px solid red; margin-bottom: 10px;"> @c.CreatedAt <br>
+        <p> <img src="@c.Creator.ImgUrl" style= "height: 60px; width: 70px;" alt="image of User">
+        <a href="show/@c.Creator.UserId" style="font-size:28px; font-family:'Playfair Display'">@c.Creator.FirstName</a>: @c.Content </p> 
+        <p><img style="border-radius: 10px; height: 250px; margin: 20px;"src="@c.Image" alt=""></p>
+            @if (c.Creator.UserId == ViewBag.User.UserId)
+            {
+                <br><a href="/delete/@c.MessageId/message" class="btn btn-sm btn-outline-danger" style="margin:5px;">Delete Post</a>
+            }
+    </li>
+        @foreach ( var p in c.Comments )
+        {
+            <li style="border-top:1px solid black; margin-left: 20px; margin-bottom:10px;">@p.CreatedAt<br>
+            <p><img src="@p.Writer.ImgUrl" style= "height: 50px; width: 60px;" alt="image of User">
+            <a href="show/@p.Writer.UserId" style="font-size:30px; font-family:'Playfair Display'">@p.Writer.FirstName:</a> @p.Comments<br></p>
+            </li>
+            @if (p.Writer.UserId == ViewBag.User.UserId)
+            {
+                <a href="/delete/@p.CommentId/comment" class="btn btn-sm btn-outline-danger">Delete Comment</a>
+            }
+        }
+        <partial name="CommentPartial" model="new Comment(){MessageId = @c.MessageId, UserId = @ViewBag.User.UserId}"/>
+}
+</ul>
+</div>
+</div>
+<div class="card" style="width: 14rem;">
+    <h4 style="border-bottom: 1px solid red; margin-bottom: 20px;">Community Links</h4>
+<img class="card-img-top" style="width: 300px; height: 200px;border-radius: 20px;"src="https://s3.amazonaws.com/runguides2/events/flyers/000/013/288/medium/stringio.txt?1572200486" alt="Card image cap">
+<div class="card-body">
+    <p class="card-text">My Block My Hood My City offers opportunities for young people in under-resourced neighborhoods to access amenities not typically available to them. Their programs encourage youth to explore different neighborhoods, cultures and cuisines. <br>
+        <a style="border-bottom: 1px solid red;" href="http://https://www.formyblock.org/"> My Block, My Hood, My City. </a>
+    </p>
+</div>
+<div class="card" style="width: 14rem;">
+<img class="card-img-top" style="width: 250px; border-radius: 20px;" src="https://scontent-ort2-2.xx.fbcdn.net/v/t1.0-9/29511060_414879825648814_8125428548883185664_n.jpg?_nc_cat=100&_nc_sid=85a577&_nc_ohc=b3H2af5Y2TYAX_0k3PV&_nc_ht=scontent-ort2-2.xx&oh=cc680a9782902ae18088f193878e31d0&oe=5F1887F0" alt="Card image cap">
+<div class="card-body">
+    <p class="card-text">The youth-driven group was formed to allow young people to address the violence they face in their communities and was key in organizing after Rekia Boyd was killed by a Chicago police officer.</br>
+    <a style="border-bottom: 1px solid red;" href="https://secure.actblue.com/donate/gkmc-1"> Good Kids, Mad City. </a></p>
+</div>
+<div class="card" style="width: 14rem;">
+<img class="card-img-top" style="width: 200px; border-radius: 20px;" src="https://upload.wikimedia.org/wikipedia/en/thumb/6/6e/Assata%27s_Daughters_Logo.png/250px-Assata%27s_Daughters_Logo.png" alt="Card image cap">
+<div class="card-body">
+    <p class="card-text">Based in Washington Park, Assata’s Daughters was founded to address the gap in programming that builds power and influence among young Black women, femmes and gender non-conforming people.<br>
+    <a style="border-bottom: 1px solid red;" href="https://www.assatasdaughters.org/donate-1"> Assata's Daughters. </a></p>
+    </div>
+</div>
+</div>
+</div>

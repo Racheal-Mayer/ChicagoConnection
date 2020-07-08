@@ -1,0 +1,140 @@
+@model List<MeetUp>
+    <link rel="stylesheet" href="~/css/MeetUp.css"/>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+
+<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+                <a class="navbar-brand">Chicago Connection</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-info" href="home">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-info" href="/logout">Logout</a>
+                        </li>
+                        @if(ViewBag.User.Admin == true) 
+                {
+                    <li class="nav-item">
+                    <a href="/Admin/Manage" class="nav-link text-info">Admin Page</a>
+                    </li>
+                }
+                <li><a class="nav-link text-info" href="/activity/new">Add a New Activity</a></li>
+                    </ul>
+                </div>
+            </div>
+            <form action="/search" method="post" class="form-inline my-2 my-lg-0">
+                <input class="form-control" style="height: 45px;"type="search" name="q"  placeholder="Search" aria-label="Search">
+            <button class="nav- link text-dark" style="margin-left: 5px; margin-bottom: 5px; border-radius: 5px; height: 45px;"type="submit">Search</button>
+        </form>
+        <a class="nav-link text-info" href="/MeetUp">Clear Search</a>
+    </nav>
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <div class="bkg">
+    <h1 class="display-4">Get Social @ViewBag.User.FirstName!</h1>
+    <p class="lead">Here you can plan hangs, RSVP, and check out the details.</p>
+    </div>
+    </div>
+</div>
+<div class="container">
+
+<br><br>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th>Activity</th>
+            <th>Date & Time</th>
+            <th>Duration</th>
+            <th>Coordinator</th>
+            <th>Party of</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(MeetUp m in Model)
+        {
+            <tr>
+                <td> <a href="/activity/@m.MeetUpId"> @m.Title </a> </td>
+                <td>@m.Date</td>
+                <td>@m.DurationTime  @m.Duration</td>
+                <td>@m.Coordinator.FirstName</td>
+                <td>@m.Participants.Count</td>
+            <td>
+                @if(ViewBag.User.UserId == m.Coordinator.UserId)
+                {
+                    <a class="btn btn-info btn-sm" href="/activity/@m.MeetUpId/delete"> Cancel Hang </a>
+                }
+                else
+                {
+                    if(m.Participants.Any(w => w.UserId == ViewBag.User.UserId))
+                    //query to see if they are watching
+                    {                                           //has to be exactly what you called it in route.
+                        <a class="btn btn-outline-info btn-sm" asp-action="ToggleActivity" asp-route-meetupId="@m.MeetUpId" asp-route-status="leave" > Back Out</a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-info btn-sm" asp-action="ToggleActivity" asp-route-meetupId="@m.MeetUpId" asp-route-status="join" > Join In! </a>
+                    }
+                }
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<h2>Things happening around you!</h2>
+<div class="card" style="width: 18rem;">
+<img class="card-img-top" src="https://media.timeout.com/images/105623500/630/472/image.jpg" alt="Card image cap">
+<div class="card-body">
+    <p class="card-text">Time Out Group is a global media and leisure business that inspires and enables people to explore and enjoy the best of the city.</p>
+    <a href="https://www.timeout.com/chicago/things-to-do/best-things-to-do-this-week-in-chicago" class="btn btn-dark">Time Out Chicago</a>
+</div>
+</div>
+<div class="card" style="width: 18rem;">
+<img class="card-img-top" src="https://images.squarespace-cdn.com/content/v1/5e2201dbe1956f245e026e34/1581031279127-IUJ2KJ48RWVTES1LYO0X/ke17ZwdGBToddI8pDm48kNX-Be9-IJzhpwq458DU3TZZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PIzxBgpPz3ETduCJ2NxZoUBiO_Axe9i-wYqLExcNbE_Gs/Kennedy+Rooftop+Logo.png" alt="Card image cap">
+<div class="card-body">
+    <p class="card-text">The Kennedy is a new rooftop atop the Hyatt Place in Wick Park, beautiful views, comfortable seating, and delicious drinks. </p>
+    <a href="https://www.kennedyrooftop.com/" class="btn btn-dark">Kennedy Rooftop</a>
+</div>
+</div>
+<div class="card" style="width: 18rem;">
+<img class="card-img-top" src="https://www.spinlister.com/blog/wp-content/uploads/2016/12/chicago-lakefront-trail-1.jpg" alt="Card image cap">
+<div class="card-body">
+    <p class="card-text">The Chicago Lakefront Trail is back open! Enjoy walking, running, biking down the trails with all seperated paths. Don't forget to stop at the beaches!</p>
+    <a href="https://www.chicagoparkdistrict.com/parks-facilities/lakefront-trail" class="btn btn-dark">Chicago Lakefront Trail</a>
+</div>
+</div>
+<h1>Get where you're going.</h1>
+<h5>Check on the Clark/Lake CTA updates. </h5>
+<table class="table table-sm">
+    <thead class="thead-dark">
+        <th>Line:</th>
+        <th>Destination:</th>
+        <th>Platform:</th>
+        <th>Arrival:</th>
+        <th>Expected timing:</th>
+    </thead>
+        @foreach( var cta in ViewBag.cta.ctatt.eta)
+{
+    <tbody>
+        <tr>
+            <td> @cta.rt</td>
+            <td>@cta.destNm</td>
+            <td>@cta.stpDe</td>
+            <td>@cta.arrT.ToShortDateString() @cta.arrT.ToShortTimeString()  </td>
+            <td> @if(@cta.isDly == "0")
+                { 
+                    <span>Delayed</span>
+                } 
+                else
+                {
+                    <span>On Time</span> } </td>
+        </tr>
+    </tbody>
+}
+</table>
+</div>
