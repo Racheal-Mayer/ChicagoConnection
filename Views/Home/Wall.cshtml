@@ -27,7 +27,7 @@
 <h4 style="border-bottom: 1px solid red;">Top News Today</h4>
 @foreach(var article in ViewBag.News.articles)
     {
-        <img src="@article.urlToImage" style="width: 300px; border-radius: 10px;" alt="Card image cap">
+        <img src="@article.urlToImage" style="width: 300px; border-radius: 10px;" alt="">
         <p style="font-family:'Playfair Display'">@article.title </p>
         <p style="font-size: 15px;">@article.description</p>
         <a style="border-bottom: 1px solid red;" href="@article.url"> Read More </a>
@@ -88,14 +88,14 @@
 </div>
 <div class="card" style="width: 14rem;">
     <h4 style="border-bottom: 1px solid red; margin-bottom: 20px;">Community Links</h4>
-<img class="card-img-top" style="width: 300px; height: 200px;border-radius: 20px;"src="https://s3.amazonaws.com/runguides2/events/flyers/000/013/288/medium/stringio.txt?1572200486" alt="Card image cap">
-<div class="card-body">
+<img class="card-top" style="width: 300px; height: 200px;border-radius: 20px;" src="/images/bhc.png" alt="Card image cap">
+<div class="card-body"> 
     <p class="card-text">My Block My Hood My City offers opportunities for young people in under-resourced neighborhoods to access amenities not typically available to them. Their programs encourage youth to explore different neighborhoods, cultures and cuisines. <br>
         <a style="border-bottom: 1px solid red;" href="http://https://www.formyblock.org/"> My Block, My Hood, My City. </a>
     </p>
 </div>
 <div class="card" style="width: 14rem;">
-<img class="card-img-top" style="width: 250px; border-radius: 20px;" src="https://scontent-ort2-2.xx.fbcdn.net/v/t1.0-9/29511060_414879825648814_8125428548883185664_n.jpg?_nc_cat=100&_nc_sid=85a577&_nc_ohc=b3H2af5Y2TYAX_0k3PV&_nc_ht=scontent-ort2-2.xx&oh=cc680a9782902ae18088f193878e31d0&oe=5F1887F0" alt="Card image cap">
+<img class="card-top" style="width: 250px; border-radius: 20px;" src="/images/gkmc.jpg" alt="Card image cap">
 <div class="card-body">
     <p class="card-text">The youth-driven group was formed to allow young people to address the violence they face in their communities and was key in organizing after Rekia Boyd was killed by a Chicago police officer.</br>
     <a style="border-bottom: 1px solid red;" href="https://secure.actblue.com/donate/gkmc-1"> Good Kids, Mad City. </a></p>
